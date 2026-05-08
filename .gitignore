@@ -38,6 +38,7 @@
 cromwell-executions/
 cromwell-workflow-logs/
 merge_deconstruct_pangenie_vcf_out/
+graph_indexes/
 
 # Helper-generated files
 all_paths.txt
@@ -49,3 +50,8 @@ node_to_paths.txt
 *.introgressed_svs*.vcf.gz
 *.introgressed_svs*.vcf.gz.tbi
 analyze_sv_topology_v6.py
+paths_to_drop.txt
+*.remove_introgression_paths.og
+*.surject.paths.txt
+*.dist
+*.xg

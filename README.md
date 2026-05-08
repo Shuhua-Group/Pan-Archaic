@@ -11,24 +11,31 @@ This repository contains the core scripts used for pangenome-resolved archaic in
    and `02_interval_liftover_for_graph_injection/liftover_introgression_tracts_paf_v17.py`
    - Prepare and lift introgression-tract intervals onto graph/sample-path coordinates.
 
-3. `03_panarchaic_wdl/panarchaic_introgression_indel_sv_v4.2.2.wdl`
+3. `03_graph_preparation/inject_introgression_paths_odgi.sh`
+   and `03_graph_preparation/remove_introgression_paths_and_build_indexes.sh`
+   - Inject lifted introgression intervals into the graph, which aligns graph node boundaries to introgression-tract boundaries.
+   - Remove the injected introgression paths before building graph indexes, preserving the refined node granularity without retaining the injected paths as genotyping/haplotype evidence.
+
+4. `03_panarchaic_wdl/panarchaic_introgression_indel_sv_v4.2.2.wdl`
    - Run the main tract-first, graph-aware workflow.
    - The WDL performs read preparation, k-mer counting, haplotype sampling, graph deconstruction, PanGenie genotyping, deconstruct/PanGenie VCF merging, introgressed-path extraction, and ODGI-based tracing of retained events.
 
-4. `03_panarchaic_wdl/merge_deconstruct_pangenie_vcf.sh`
+5. `03_panarchaic_wdl/merge_deconstruct_pangenie_vcf.sh`
    and `03_panarchaic_wdl/trace_introgressed_variants_odgi.sh`
    - Helper scripts used by the WDL to merge VCF annotations and trace events through introgressed graph paths.
 
-5. `04_post_wdl_vcf_standardization/standardize_introgressed_vcf_for_annotation.py`
+6. `04_post_wdl_vcf_standardization/standardize_introgressed_vcf_for_annotation.py`
    - Standardize final VCF records for downstream annotation and summary. This script assigns stable IDs, adds record-level/per-allele SV annotations, and removes same-length non-inversion replacements from the final indel/SV denominator.
+
+See `03_graph_preparation/README.md` for the short rationale behind the inject-then-remove graph preparation step.
 
 ## Required inputs
 
 The WDL expects these inputs to be supplied through a Cromwell-compatible JSON file:
 
 - Ancient-sample FASTQ input, optionally with an already prepared uncompressed FASTQ for PanGenie.
-- Original pangenome graph/index inputs: `original_gbz_file`, `original_hapl_file`, `original_ri_file`, and `original_snarls_file`.
-- An introgression-injected ODGI graph: `injected_og_file`.
+- Boundary-aware graph/index inputs generated after injecting introgression intervals and then removing the injected paths: `original_gbz_file`, `original_hapl_file`, `original_ri_file`, and `original_snarls_file`.
+- The introgression-injected ODGI graph before path removal: `injected_og_file`.
 - Reference FASTA and index files.
 - Container images for `vg`, PanGenie, ODGI, and a basic Unix utility environment.
 - Helper script paths pointing to `merge_deconstruct_pangenie_vcf.sh` and `trace_introgressed_variants_odgi.sh`.

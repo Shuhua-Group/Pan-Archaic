@@ -36,7 +36,11 @@ workflow AncientIntrogressionSVDetection_FastMode {
         # Optional: if provided, skip PrepareReadsForPanGenie and use this as PanGenie reads (must be uncompressed .fq)
         File? prepared_fastq_for_pangenie
 
-        # ===== Original Pangenome Graph Files =====
+        # ===== Boundary-aware graph/index files =====
+        # These are built after introgression-path injection and subsequent
+        # removal of the injected paths. The node partition remains aligned to
+        # introgression boundaries, but the injected paths are not used as
+        # genotyping/haplotype evidence.
         File original_gbz_file
         File original_hapl_file
         File original_ri_file
