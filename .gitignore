@@ -1,0 +1,51 @@
+# Runtime outputs
+*.log
+*.tmp
+*.out
+*.err
+*.stats.tsv
+*.rejected.tsv
+
+# Large genomics artifacts and indexes
+*.vcf
+*.vcf.gz
+*.vcf.gz.tbi
+*.bcf
+*.bcf.csi
+*.fa
+*.fa.fai
+*.fasta
+*.fasta.fai
+*.fq
+*.fq.gz
+*.fastq
+*.fastq.gz
+*.bam
+*.bai
+*.cram
+*.crai
+*.gfa
+*.og
+*.gbz
+*.hapl
+*.ri
+*.snarls
+*.kff
+*.kmc_pre
+*.kmc_suf
+
+# Workflow scratch directories
+cromwell-executions/
+cromwell-workflow-logs/
+merge_deconstruct_pangenie_vcf_out/
+
+# Helper-generated files
+all_paths.txt
+node_to_paths.txt
+*.introgressed_paths.txt
+*.merged.vcf.gz
+*.merged.vcf.gz.tbi
+*.introgressed_svs*.vcf
+*.introgressed_svs*.vcf.gz
+*.introgressed_svs*.vcf.gz.tbi
+analyze_sv_topology_v6.py

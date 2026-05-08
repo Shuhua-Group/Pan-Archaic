@@ -1,0 +1,6 @@
+*.awk text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.tsv text eol=lf
+*.wdl text eol=lf
